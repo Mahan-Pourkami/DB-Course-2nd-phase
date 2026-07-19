@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS Category (
 CREATE TABLE IF NOT EXISTS Product (
     id SERIAL PRIMARY KEY,
     details TEXT,
-    active BOOLEAN NOT NULL DEFAULT TRUE,
+    active BOOLEAN NOT NULL DEFAULT FALSE,
     price DECIMAL(12, 2) NOT NULL,
     seller_eco_num VARCHAR(50) NOT NULL,
     CONSTRAINT chk_product_price CHECK (price >= 0),

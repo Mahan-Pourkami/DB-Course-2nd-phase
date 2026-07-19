@@ -1,11 +1,5 @@
--- ============================================================================
--- DB Project Phase 3 - Data Insertion and Testing Queries
--- Faculty of Computer Engineering, Amirkabir University of Technology (AUT)
--- Spring 1405
--- File: phase3-insert.sql
--- ============================================================================
 
--- 1. Insert 10 rows into Buyer Table
+
 INSERT INTO Buyer (first_name, last_name, phone, email, register_date, status) VALUES
 ('Ali', 'Rezai', '09121111111', 'ali.rezai@gmail.com', '2026-01-15', 'active'),
 ('Zahra', 'Ahmadi', '09122222222', 'zahra.ahmadi@yahoo.com', '2026-02-10', 'active'),
@@ -18,7 +12,7 @@ INSERT INTO Buyer (first_name, last_name, phone, email, register_date, status) V
 ('Amir', 'Naderi', '09129999999', 'amir.naderi@gmail.com', '2026-06-01', 'active'),
 ('Neda', 'Ghasemi', '09120000000', 'neda.gh@gmail.com', '2026-06-14', 'inactive');
 
--- 2. Insert 10 rows into Address Table (Some buyers have multiple addresses)
+
 INSERT INTO Address (buyer_id, city, street, no) VALUES
 (1, 'Tehran', 'Vaniak St, No 12', '12'),
 (1, 'Tehran', 'Azadi St, Alley 4', '5'),
@@ -31,7 +25,7 @@ INSERT INTO Address (buyer_id, city, street, no) VALUES
 (8, 'Isfahan', 'Khajou St', '9'),
 (9, 'Tehran', 'Sattarkhan St', '77');
 
--- 3. Insert 10 rows into Seller Table
+
 INSERT INTO Seller (eco_num, bus_name, phone, email, is_confirmed, register_date) VALUES
 ('ECO-1001', 'DigiStore', '02188881111', 'info@digistore.com', TRUE, '2025-01-01'),
 ('ECO-1002', 'TechnoLand', '02188882222', 'sales@technoland.ir', TRUE, '2025-03-15'),
@@ -44,20 +38,20 @@ INSERT INTO Seller (eco_num, bus_name, phone, email, is_confirmed, register_date
 ('ECO-1009', 'BeautyZone', '02188889999', 'beauty@zone.ir', FALSE, '2026-04-01'),
 ('ECO-1010', 'OfficeSupply', '02188880000', 'office@supply.com', TRUE, '2026-05-10');
 
--- 4. Insert 10 rows into Category Table (Including Sub-Categories)
-INSERT INTO Category (name, parent_category_id) VALUES
-('Electronics', NULL), -- ID 1
-('Books', NULL),       -- ID 2
-('Clothing', NULL),    -- ID 3
-('Smartphones', 1),    -- ID 4 (Sub of Electronics)
-('Laptops', 1),        -- ID 5 (Sub of Electronics)
-('Novels', 2),         -- ID 6 (Sub of Books)
-('Academic', 2),       -- ID 7 (Sub of Books)
-('Shoes', 3),          -- ID 8 (Sub of Clothing)
-('Home & Kitchen', NULL), -- ID 9
-('Appliances', 9);     -- ID 10 (Sub of Home)
 
--- 5. Insert 10 rows into Product Table
+INSERT INTO Category (name, parent_category_id) VALUES
+('Electronics', NULL),
+('Books', NULL),
+('Clothing', NULL),
+('Smartphones', 1),
+('Laptops', 1),
+('Novels', 2),
+('Academic', 2),
+('Shoes', 3),
+('Home & Kitchen', NULL),
+('Appliances', 9);
+
+
 INSERT INTO Product (details, active, price, seller_eco_num) VALUES
 ('iPhone 15 Pro 256GB', TRUE, 60000000.00, 'ECO-1001'), -- ID 1
 ('Samsung Galaxy S24 Ultra', TRUE, 55000000.00, 'ECO-1002'), -- ID 2
@@ -70,24 +64,23 @@ INSERT INTO Product (details, active, price, seller_eco_num) VALUES
 ('Electric Kettle 1.7L', TRUE, 2500000.00, 'ECO-1005'), -- ID 9
 ('Board Game Monopoly', TRUE, 800000.00, 'ECO-1008'); -- ID 10
 
--- 5b. Populate Product_Category_Mapping
+
 INSERT INTO Product_Category_Mapping (product_id, category_id) VALUES
 (1, 4), (2, 4), (3, 5), (4, 7), (5, 7), (6, 8), (7, 3), (8, 10), (9, 10), (10, 2);
 
--- 6. Insert 10 rows into Storage_Quantity Table (Weak Entity)
 INSERT INTO Storage_Quantity (product_id, quantity_count, location, warning_number) VALUES
 (1, 25, 'Aisle A-Shelf 3', 5),
-(2, 3, 'Aisle A-Shelf 4', 5),  -- Low stock trigger
+(2, 3, 'Aisle A-Shelf 4', 5),
 (3, 8, 'Aisle B-Shelf 1', 2),
 (4, 50, 'Aisle C-Shelf 2', 10),
-(5, 1, 'Aisle C-Shelf 3', 5),  -- Low stock trigger
+(5, 1, 'Aisle C-Shelf 3', 5),
 (6, 15, 'Aisle D-Shelf 1', 4),
 (7, 12, 'Aisle D-Shelf 2', 3),
 (8, 6, 'Aisle E-Shelf 5', 2),
-(9, 2, 'Aisle E-Shelf 6', 3),  -- Low stock trigger
+(9, 2, 'Aisle E-Shelf 6', 3),
 (10, 40, 'Aisle F-Shelf 1', 5);
 
--- 7. Insert 10 rows into Coupon Table
+
 INSERT INTO Coupon (code, type, value, min_price, max_usage) VALUES
 ('WELCOME100', 'amount', 100000.00, 500000.00, 100),
 ('GOLDEN20', 'percent', 20.00, 2000000.00, 10),
@@ -100,7 +93,7 @@ INSERT INTO Coupon (code, type, value, min_price, max_usage) VALUES
 ('OFFER2', 'amount', 200000.00, 1000000.00, 20),
 ('FREE_SHIP', 'amount', 150000.00, 1000000.00, 1000);
 
--- 8. Insert 10 rows into Order Table (Dates around June/July 2026)
+
 INSERT INTO "Order" (buyer_id, address_id, register_date, total, send_cost, discount, status, coupon_code) VALUES
 (1, 1, '2026-06-20 14:30:00', 60000000.00, 150000.00, 0.00, 'delivered', NULL),
 (1, 2, '2026-07-15 10:00:00', 55000000.00, 150000.00, 2000000.00, 'paid', 'BLACKFRIDAY'),
@@ -113,7 +106,7 @@ INSERT INTO "Order" (buyer_id, address_id, register_date, total, send_cost, disc
 (9, 10, '2026-07-11 20:10:00', 800000.00, 150000.00, 0.00, 'processing', NULL),
 (10, 1, '2026-07-13 15:30:00', 12000000.00, 150000.00, 0.00, 'paid', NULL);
 
--- 9. Insert 10 rows into Order_item Table
+
 INSERT INTO Order_item (order_id, product_id, quantity, unit_price) VALUES
 (1, 1, 1, 60000000.00),
 (2, 2, 1, 55000000.00),
@@ -126,7 +119,7 @@ INSERT INTO Order_item (order_id, product_id, quantity, unit_price) VALUES
 (8, 5, 1, 600000.00),
 (9, 10, 1, 800000.00);
 
--- 10. Insert 10 rows into Pay Table
+
 INSERT INTO Pay (code, order_id, fee, pay_way, status, time) VALUES
 ('TRX-9901', 1, 60150000.00, 'gateway', 'successful', '2026-06-20 14:35:00'),
 ('TRX-9902', 2, 53150000.00, 'gateway', 'successful', '2026-07-15 10:05:00'),
@@ -139,7 +132,7 @@ INSERT INTO Pay (code, order_id, fee, pay_way, status, time) VALUES
 ('TRX-9909', 9, 950000.00, 'cod', 'pending', '2026-07-11 20:15:00'),
 ('TRX-9910', 10, 12150000.00, 'wallet', 'successful', '2026-07-13 15:35:00');
 
--- 11. Insert 10 rows into Post Table
+
 INSERT INTO Post (code, order_id, company, send_time, recieve_time, status) VALUES
 ('POST-8801', 1, 'Tipax', '2026-06-21 09:00:00', '2026-06-23 14:00:00', 'delivered'),
 ('POST-8802', 2, 'NationalPost', NULL, NULL, 'preparing'),
